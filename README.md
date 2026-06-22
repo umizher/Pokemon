@@ -13,7 +13,7 @@ o recién anunciado, vigila **qué retailers lo tienen en stock a MSRP o por deb
   seed de MSRP, store de estado, filtro MSRP, dedupe, orquestador y CLI.
 - [x] **Fase 2** — Providers Best Buy + Target end-to-end + Discord.
 - [x] **Fase 3** — Release Radar (pokemon.com).
-- [ ] **Fase 4** — Dashboard en GitHub Pages.
+- [x] **Fase 4** — Dashboard en GitHub Pages.
 - [ ] **Fase 5** — GitHub Actions cron + secrets.
 - [ ] **Fase 6** — Más providers + anti-bot + alertas de fallo + Telegram/Email.
 
@@ -50,6 +50,12 @@ Modo backend (loop continuo, intervalos más cortos):
 
 ```bash
 python -m tcg_monitor --loop --interval 600
+```
+
+Ver el dashboard localmente:
+
+```bash
+python -m http.server -d docs 8099   # http://localhost:8099
 ```
 
 Release Radar (descubre productos sellados nuevos y actualiza `docs/data/catalog.json`):
