@@ -34,5 +34,41 @@
     "image_url": null,
     "source": "seed",
     "skus": {}
+  },
+  {
+    "id": "lumiose-city-mini-tin",
+    "set_name": "Lumiose City Mini",
+    "product_type": "tin",
+    "language": "EN",
+    "release_date": "2026-06-01",
+    "official_msrp": 24.99,
+    "currency": "USD",
+    "image_url": null,
+    "source": "pokemon.com",
+    "skus": {}
+  },
+  {
+    "id": "mega-moonlit-tin",
+    "set_name": "Mega Moonlit",
+    "product_type": "tin",
+    "language": "EN",
+    "release_date": "2026-06-01",
+    "official_msrp": 24.99,
+    "currency": "USD",
+    "image_url": null,
+    "source": "pokemon.com",
+    "skus": {}
+  },
+  {
+    "id": "first-partner-illustration-series-2-collection-box",
+    "set_name": "First Partner Illustration — Series 2",
+    "product_type": "collection_box",
+    "language": "EN",
+    "release_date": "2026-06-01",
+    "official_msrp": 49.99,
+    "currency": "USD",
+    "image_url": null,
+    "source": "pokemon.com",
+    "skus": {}
   }
 ]
