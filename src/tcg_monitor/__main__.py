@@ -12,6 +12,7 @@ import logging
 from . import notify, providers, radar  # noqa: F401  (registra implementaciones)
 from .config import Settings, load_settings
 from .dedupe import DedupeStore
+from .health import HealthTracker
 from .models import Product
 from .notify.base import Notifier, get_registry as notifier_registry
 from .orchestrator import Orchestrator
@@ -133,6 +134,7 @@ def main(argv: list[str] | None = None) -> int:
     stock_providers = build_stock_providers(settings)
     notifiers = build_notifiers(settings)
     dedupe = DedupeStore("docs/data/dedupe.json", ttl_hours=settings.dedupe_hours)
+    health = HealthTracker("docs/data/health.json")
 
     logging.info(
         "Catálogo: %d productos | providers activos: %s | notificadores: %s",
@@ -141,7 +143,7 @@ def main(argv: list[str] | None = None) -> int:
         [n.name for n in notifiers] or "ninguno",
     )
 
-    orch = Orchestrator(settings, products, stock_providers, notifiers, dedupe)
+    orch = Orchestrator(settings, products, stock_providers, notifiers, dedupe, health)
     if args.loop:
         orch.run_loop(args.interval)
     else:

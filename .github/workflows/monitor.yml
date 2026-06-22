@@ -32,12 +32,14 @@ jobs:
 
       # Persiste el estado de dedupe entre ejecuciones (runners efímeros).
       # Clave por run_id + restore-keys de prefijo para recuperar el más reciente.
-      - name: Restaurar cache de dedupe
+      - name: Restaurar cache de dedupe + salud
         uses: actions/cache@v4
         with:
-          path: docs/data/dedupe.json
-          key: dedupe-${{ github.run_id }}
-          restore-keys: dedupe-
+          path: |
+            docs/data/dedupe.json
+            docs/data/health.json
+          key: state-${{ github.run_id }}
+          restore-keys: state-
 
       - name: Ejecutar radar + ciclo de stock
         env:

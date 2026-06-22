@@ -71,6 +71,20 @@ python -m tcg_monitor --radar --once   # descubrir y luego revisar stock
 > el seed de `config/products.yaml`. El parser está testeado con un fixture y se
 > activa en cuanto haya acceso (IP no bloqueada o proxy).
 
+## Notificaciones y robustez
+
+- **Canales** (se activan solo si hay credenciales): **Discord** (webhook, default),
+  **Telegram** (Bot API) y **Email** (SMTP). Habilítalos en `config/settings.yaml`.
+- **Deduplicación**: una alerta `(producto, retailer, precio)` no se repite dentro de
+  `dedupe_hours` (default 6h). Persistida en `docs/data/dedupe.json`.
+- **Alertas de fallo sostenido**: si un provider falla N ciclos seguidos (umbral 3) se
+  envía un aviso por los canales activos, una sola vez por racha; se resetea al
+  recuperarse. Estado persistido en `docs/data/health.json`.
+- **Aislamiento**: el fallo de un provider nunca rompe a los demás (se refleja en
+  `providers_health` y en el dashboard con un badge rojo).
+- **Anti-bot**: `http_client` rota User-Agent, usa headers realistas, jitter entre
+  requests y backoff exponencial ante 403/429/503. Proxy opcional vía `HTTP_PROXY_URL`.
+
 ## Despliegue (GitHub Actions + Pages)
 
 ### 1. Configurar Secrets

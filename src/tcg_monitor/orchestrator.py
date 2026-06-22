@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from .config import Settings
 from .dedupe import DedupeStore
 from .filters import passes_alert_rule
+from .health import HealthTracker
 from .models import (
     Alert,
     Product,
@@ -33,12 +34,14 @@ class Orchestrator:
         providers: list[StockProvider],
         notifiers: list[Notifier],
         dedupe: DedupeStore,
+        health: HealthTracker | None = None,
     ) -> None:
         self.settings = settings
         self.products = products
         self.providers = providers
         self.notifiers = notifiers
         self.dedupe = dedupe
+        self.health = health
 
     def run_once(self) -> State:
         listings: list[RetailerListing] = []
@@ -60,6 +63,7 @@ class Orchestrator:
                 ph.last_error = f"inesperado: {exc}"
                 logger.exception("Provider %s lanzó excepción inesperada", provider.name)
             health[provider.name] = ph
+            self._track_health(provider.name, ph.ok, ph.last_error)
 
         self._dispatch_alerts(listings)
 
@@ -80,6 +84,19 @@ class Orchestrator:
             except Exception:  # nunca matar el loop
                 logger.exception("run_once falló; continuando")
             time.sleep(interval)
+
+    def _track_health(self, name: str, ok: bool, last_error: str | None) -> None:
+        if self.health is None:
+            return
+        count = self.health.update(name, ok)
+        if self.health.should_alert(count):
+            subject = f"⚠️ Provider '{name}' caído"
+            body = f"Falló {count} ciclos seguidos. Último error: {last_error or 'desconocido'}"
+            for notifier in self.notifiers:
+                try:
+                    notifier.send_text(subject, body)
+                except Exception:
+                    logger.exception("Notificador %s falló al alertar salud", notifier.name)
 
     def _dispatch_alerts(self, listings: list[RetailerListing]) -> None:
         by_id = {p.id: p for p in self.products}

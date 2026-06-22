@@ -29,5 +29,12 @@ class Notifier(ABC):
 
     @abstractmethod
     def send(self, alert: Alert) -> bool:
-        """Envía la alerta. Devuelve True si tuvo éxito."""
+        """Envía la alerta de producto. Devuelve True si tuvo éxito."""
         raise NotImplementedError
+
+    def send_text(self, subject: str, body: str) -> bool:
+        """Envía un mensaje de texto libre (p.ej. alertas de salud).
+
+        Por defecto no soportado; los notifiers concretos lo implementan.
+        """
+        return False

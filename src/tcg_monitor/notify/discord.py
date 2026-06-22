@@ -40,14 +40,14 @@ class DiscordNotifier(Notifier):
     def __init__(self, client: httpx.Client | None = None) -> None:
         self._client = client
 
-    def send(self, alert: Alert) -> bool:
+    def _post(self, payload: dict) -> bool:
         webhook = os.getenv("DISCORD_WEBHOOK_URL")
         if not webhook:
             logger.warning("Discord: falta DISCORD_WEBHOOK_URL")
             return False
         client = self._client or httpx.Client(timeout=15.0)
         try:
-            resp = client.post(webhook, json=build_payload(alert))
+            resp = client.post(webhook, json=payload)
         finally:
             if self._client is None:
                 client.close()
@@ -55,3 +55,10 @@ class DiscordNotifier(Notifier):
         if not ok:
             logger.warning("Discord webhook -> %d", resp.status_code)
         return ok
+
+    def send(self, alert: Alert) -> bool:
+        return self._post(build_payload(alert))
+
+    def send_text(self, subject: str, body: str) -> bool:
+        embed = {"title": subject, "description": body, "color": 0xE74C3C}
+        return self._post({"username": "TCG Monitor", "embeds": [embed]})

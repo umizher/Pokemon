@@ -15,4 +15,5 @@ venv/
 
 # Local runtime artifacts
 docs/data/dedupe.json
+docs/data/health.json
 *.log
