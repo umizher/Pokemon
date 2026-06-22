@@ -11,8 +11,8 @@ o recién anunciado, vigila **qué retailers lo tienen en stock a MSRP o por deb
 
 - [x] **Fase 1 — Scaffolding**: modelos, interfaz de provider/notifier/radar, config,
   seed de MSRP, store de estado, filtro MSRP, dedupe, orquestador y CLI.
-- [ ] **Fase 2** — Providers Best Buy + Target end-to-end + Discord.
-- [ ] **Fase 3** — Release Radar (pokemon.com).
+- [x] **Fase 2** — Providers Best Buy + Target end-to-end + Discord.
+- [x] **Fase 3** — Release Radar (pokemon.com).
 - [ ] **Fase 4** — Dashboard en GitHub Pages.
 - [ ] **Fase 5** — GitHub Actions cron + secrets.
 - [ ] **Fase 6** — Más providers + anti-bot + alertas de fallo + Telegram/Email.
@@ -51,6 +51,19 @@ Modo backend (loop continuo, intervalos más cortos):
 ```bash
 python -m tcg_monitor --loop --interval 600
 ```
+
+Release Radar (descubre productos sellados nuevos y actualiza `docs/data/catalog.json`):
+
+```bash
+python -m tcg_monitor --radar          # solo descubrir + actualizar catálogo
+python -m tcg_monitor --radar --once   # descubrir y luego revisar stock
+```
+
+> **Nota honesta:** pokemon.com está protegido por Akamai y devuelve **403 desde
+> infra gratis** (GitHub Actions / contenedores sin proxy residencial). El radar
+> degrada a "0 descubiertos" sin romper el ciclo; el catálogo sigue funcionando con
+> el seed de `config/products.yaml`. El parser está testeado con un fixture y se
+> activa en cuanto haya acceso (IP no bloqueada o proxy).
 
 ## Realidades / honestidad técnica
 

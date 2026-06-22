@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import tempfile
 from pathlib import Path
 
@@ -57,6 +58,37 @@ def read_catalog(path: Path = CATALOG_PATH) -> list[Product]:
         return []
     payload = json.loads(path.read_text())
     return [Product.model_validate(item) for item in payload]
+
+
+def canonical_key(p: Product) -> str:
+    """Clave estable por (set, tipo) para deduplicar seed vs descubierto."""
+    slug = re.sub(r"[^a-z0-9]+", "-", p.set_name.lower()).strip("-")
+    return f"{slug}|{p.product_type.value}"
+
+
+def merge_discovered(
+    existing: list[Product], discovered: list[Product]
+) -> list[Product]:
+    """Enriquece el catálogo con productos del radar sin pisar datos de config.
+
+    Conserva id/skus/MSRP del seed; solo rellena campos vacíos desde el radar.
+    """
+    by_key = {canonical_key(p): p for p in existing}
+    for d in discovered:
+        key = canonical_key(d)
+        current = by_key.get(key)
+        if current is None:
+            by_key[key] = d
+            continue
+        merged = current.model_copy(deep=True)
+        if merged.release_date is None:
+            merged.release_date = d.release_date
+        if merged.image_url is None:
+            merged.image_url = d.image_url
+        if merged.official_msrp is None:
+            merged.official_msrp = d.official_msrp
+        by_key[key] = merged
+    return list(by_key.values())
 
 
 def load_seed_products(path: str | Path = "config/products.yaml") -> list[Product]:
