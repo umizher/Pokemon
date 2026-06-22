@@ -1,0 +1,31 @@
+# Configuración global del monitor. Los secretos NO van aquí (usar .env).
+
+# Filtro MSRP: se alerta si price <= official_msrp * (1 + msrp_tolerance).
+# 0.0 = solo a MSRP o menos. 0.05 = hasta 5% por encima.
+msrp_tolerance: 0.0
+
+# Deduplicación de alertas: no repetir (product_id, retailer, price) en N horas.
+dedupe_hours: 6
+
+# Localización para providers que requieren tienda/zip (ej. Target RedSky).
+store_id: "1357"
+zip: "10001"
+
+# Providers de stock habilitados. Un provider deshabilitado o sin credenciales
+# se omite con elegancia (se marca en providers_health).
+stock_providers:
+  bestbuy: true
+  target: true
+  walmart: false        # requiere aprobación de afiliados
+  amazon: false         # requiere PA-API 5.0
+  pokemoncenter: false  # best-effort, requiere proxy (Cloudflare)
+
+# Canales de notificación habilitados (se activan solo si hay credenciales).
+notifiers:
+  discord: true
+  telegram: false
+  email: false
+
+# Release Radar
+radar:
+  pokemon_official: true

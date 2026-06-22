@@ -1,0 +1,17 @@
+{
+  "from": 1,
+  "to": 1,
+  "total": 1,
+  "products": [
+    {
+      "sku": 6588543,
+      "name": "Pokemon Trading Card Game: Perfect Order Elite Trainer Box",
+      "salePrice": 59.99,
+      "regularPrice": 59.99,
+      "onlineAvailability": false,
+      "orderable": "SoldOut",
+      "url": "https://www.bestbuy.com/site/pokemon-perfect-order-etb/6588543.p",
+      "image": "https://pisces.bbystatic.com/image.jpg"
+    }
+  ]
+}

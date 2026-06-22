@@ -1,0 +1,45 @@
+# Seed del catálogo + MSRP de referencia (USD, mercado EN/US).
+#
+# NOTA DE HONESTIDAD: los MSRP son valores de referencia típicos del mercado
+# US y deben validarse contra el anuncio oficial de cada producto. El Release
+# Radar (Fase 3) irá añadiendo/actualizando productos automáticamente desde
+# pokemon.com; este archivo es la semilla inicial y la fuente de MSRP de
+# referencia cuando la fuente oficial no publica precio.
+#
+# `skus` mapea retailer -> identificador del producto en esa tienda
+# (Best Buy: SKU numérico; Target: TCIN). Déjalos vacíos hasta confirmarlos;
+# un provider sin SKU para un producto devuelve stock_state: unknown.
+
+products:
+  - id: sv-perfect-order-etb
+    set_name: "Perfect Order"
+    product_type: elite_trainer_box
+    language: EN
+    release_date: 2026-03-27
+    official_msrp: 59.99
+    currency: USD
+    image_url: null
+    source: seed
+    skus: {}
+
+  - id: sv-chaos-rising-etb
+    set_name: "Chaos Rising"
+    product_type: elite_trainer_box
+    language: EN
+    release_date: 2026-05-22
+    official_msrp: 59.99
+    currency: USD
+    image_url: null
+    source: seed
+    skus: {}
+
+  - id: sv-pitch-black-booster-bundle
+    set_name: "Pitch Black"
+    product_type: booster_bundle
+    language: EN
+    release_date: 2026-07-17
+    official_msrp: 26.99
+    currency: USD
+    image_url: null
+    source: seed
+    skus: {}

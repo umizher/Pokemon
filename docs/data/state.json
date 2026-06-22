@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-06-22T18:49:10.813564Z",
+  "providers_health": {
+    "target": {
+      "name": "target",
+      "ok": true,
+      "last_error": null,
+      "last_checked": "2026-06-22T18:49:10.813206Z"
+    }
+  },
+  "products": [
+    {
+      "id": "sv-perfect-order-etb",
+      "set_name": "Perfect Order",
+      "product_type": "elite_trainer_box",
+      "language": "EN",
+      "release_date": "2026-03-27",
+      "official_msrp": 59.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "skus": {}
+    },
+    {
+      "id": "sv-chaos-rising-etb",
+      "set_name": "Chaos Rising",
+      "product_type": "elite_trainer_box",
+      "language": "EN",
+      "release_date": "2026-05-22",
+      "official_msrp": 59.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "skus": {}
+    },
+    {
+      "id": "sv-pitch-black-booster-bundle",
+      "set_name": "Pitch Black",
+      "product_type": "booster_bundle",
+      "language": "EN",
+      "release_date": "2026-07-17",
+      "official_msrp": 26.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "skus": {}
+    }
+  ],
+  "listings": [
+    {
+      "product_id": "sv-perfect-order-etb",
+      "retailer": "target",
+      "url": null,
+      "sku": null,
+      "price": null,
+      "currency": "USD",
+      "stock_state": "unknown",
+      "last_checked": "2026-06-22T18:49:10.813329Z",
+      "response_hash": null
+    },
+    {
+      "product_id": "sv-chaos-rising-etb",
+      "retailer": "target",
+      "url": null,
+      "sku": null,
+      "price": null,
+      "currency": "USD",
+      "stock_state": "unknown",
+      "last_checked": "2026-06-22T18:49:10.813380Z",
+      "response_hash": null
+    },
+    {
+      "product_id": "sv-pitch-black-booster-bundle",
+      "retailer": "target",
+      "url": null,
+      "sku": null,
+      "price": null,
+      "currency": "USD",
+      "stock_state": "unknown",
+      "last_checked": "2026-06-22T18:49:10.813426Z",
+      "response_hash": null
+    }
+  ]
+}
