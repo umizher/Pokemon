@@ -1,6 +1,13 @@
 {
-  "generated_at": "2026-06-22T16:01:49.617913Z",
-  "providers_health": {},
+  "generated_at": "2026-06-22T18:16:25.638905Z",
+  "providers_health": {
+    "target": {
+      "name": "target",
+      "ok": true,
+      "last_error": null,
+      "last_checked": "2026-06-22T18:16:25.638548Z"
+    }
+  },
   "products": [
     {
       "id": "sv-perfect-order-etb",
@@ -39,5 +46,39 @@
       "skus": {}
     }
   ],
-  "listings": []
+  "listings": [
+    {
+      "product_id": "sv-perfect-order-etb",
+      "retailer": "target",
+      "url": null,
+      "sku": null,
+      "price": null,
+      "currency": "USD",
+      "stock_state": "unknown",
+      "last_checked": "2026-06-22T18:16:25.638780Z",
+      "response_hash": null
+    },
+    {
+      "product_id": "sv-chaos-rising-etb",
+      "retailer": "target",
+      "url": null,
+      "sku": null,
+      "price": null,
+      "currency": "USD",
+      "stock_state": "unknown",
+      "last_checked": "2026-06-22T18:16:25.638842Z",
+      "response_hash": null
+    },
+    {
+      "product_id": "sv-pitch-black-booster-bundle",
+      "retailer": "target",
+      "url": null,
+      "sku": null,
+      "price": null,
+      "currency": "USD",
+      "stock_state": "unknown",
+      "last_checked": "2026-06-22T18:16:25.638895Z",
+      "response_hash": null
+    }
+  ]
 }

@@ -7,6 +7,6 @@ de `base`. En Fase 1 todavía no hay implementaciones concretas.
 from __future__ import annotations
 
 from . import base  # noqa: F401  (mantiene el registro accesible)
+from . import bestbuy, target  # noqa: F401  (auto-registro)
 
-# Las fases siguientes importarán aquí cada provider para auto-registrarlo, p.ej.
-# from . import bestbuy, target  # noqa: F401
+# Fase 6: from . import walmart, amazon, pokemoncenter  # noqa: F401
