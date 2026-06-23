@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-23T08:05:43.690806Z",
+  "generated_at": "2026-06-23T11:26:39.548164Z",
   "providers_health": {
     "target": {
       "name": "target",
       "ok": true,
       "last_error": null,
-      "last_checked": "2026-06-23T08:05:43.690332Z"
+      "last_checked": "2026-06-23T11:26:39.547679Z"
     }
   },
   "products": [
@@ -91,7 +91,7 @@
       "price": null,
       "currency": "USD",
       "stock_state": "unknown",
-      "last_checked": "2026-06-23T08:05:43.690407Z",
+      "last_checked": "2026-06-23T11:26:39.547766Z",
       "response_hash": null
     },
     {
@@ -102,7 +102,7 @@
       "price": null,
       "currency": "USD",
       "stock_state": "unknown",
-      "last_checked": "2026-06-23T08:05:43.690477Z",
+      "last_checked": "2026-06-23T11:26:39.547829Z",
       "response_hash": null
     },
     {
@@ -113,7 +113,7 @@
       "price": null,
       "currency": "USD",
       "stock_state": "unknown",
-      "last_checked": "2026-06-23T08:05:43.690526Z",
+      "last_checked": "2026-06-23T11:26:39.547877Z",
       "response_hash": null
     },
     {
@@ -124,7 +124,7 @@
       "price": null,
       "currency": "USD",
       "stock_state": "unknown",
-      "last_checked": "2026-06-23T08:05:43.690566Z",
+      "last_checked": "2026-06-23T11:26:39.547925Z",
       "response_hash": null
     },
     {
@@ -135,7 +135,7 @@
       "price": null,
       "currency": "USD",
       "stock_state": "unknown",
-      "last_checked": "2026-06-23T08:05:43.690602Z",
+      "last_checked": "2026-06-23T11:26:39.547970Z",
       "response_hash": null
     },
     {
@@ -146,7 +146,7 @@
       "price": null,
       "currency": "USD",
       "stock_state": "unknown",
-      "last_checked": "2026-06-23T08:05:43.690643Z",
+      "last_checked": "2026-06-23T11:26:39.548022Z",
       "response_hash": null
     }
   ]
