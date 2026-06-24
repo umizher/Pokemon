@@ -1,32 +1,25 @@
-name: Calendario (build + deploy Pages)
+name: Actualizar calendario y stock
 
-# Construye el calendario (refresca docs/data) y lo publica en GitHub Pages.
-# Usa configure-pages con enablement:true para ACTIVAR Pages automáticamente,
-# sin necesidad de tocar Settings → Pages a mano.
+# Refresca el calendario y el stock de Best Buy, y guarda el resultado en
+# docs/data/*.json. Como GitHub Pages sirve la carpeta /docs ("Deploy from a
+# branch"), al hacer commit del estado el dashboard se actualiza solo.
 
 on:
-  push:
-    branches: [main]
   schedule:
-    # Cada 15 min (cron best-effort, puede retrasarse). Refresca calendario/stock.
+    # Cada 15 min (cron best-effort, puede retrasarse).
     - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: update
   cancel-in-progress: false
 
 jobs:
-  build-deploy:
+  update:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -55,19 +48,17 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        # No romper el deploy si una fuente externa falla.
+        # No romper el ciclo si una fuente externa falla.
         run: python -m tcg_monitor --radar --once || true
 
-      - name: Configurar Pages (activa Pages automáticamente)
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Subir artefacto del dashboard
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-
-      - name: Desplegar a Pages
-        id: deploy
-        uses: actions/deploy-pages@v4
+      - name: Guardar el estado actualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/state.json docs/data/catalog.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en el estado."
+          else
+            git commit -m "chore: actualizar estado del calendario [skip ci]"
+            git push
+          fi
