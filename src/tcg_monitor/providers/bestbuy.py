@@ -18,7 +18,10 @@ from .base import ProviderError, StockProvider, register_provider
 logger = logging.getLogger(__name__)
 
 API_BASE = "https://api.bestbuy.com/v1"
-SHOW_FIELDS = "sku,name,salePrice,regularPrice,onlineAvailability,orderable,url,image"
+SHOW_FIELDS = (
+    "sku,name,salePrice,regularPrice,onlineAvailability,orderable,"
+    "url,image,releaseDate,preorderable"
+)
 
 # Texto de búsqueda por tipo de producto (en inglés, mercado US).
 _TYPE_KEYWORDS: dict[ProductType, str] = {
@@ -35,7 +38,7 @@ def _map_stock(orderable: str | None, online: bool | None) -> StockState:
     o = (orderable or "").lower()
     if o == "available" and online:
         return StockState.in_stock
-    if o in ("comingsoon", "backorder"):
+    if o in ("comingsoon", "backorder") or "preorder" in o:
         return StockState.preorder
     if o == "soldout":
         return StockState.out_of_stock

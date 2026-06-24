@@ -3,39 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Monitor Pokémon TCG — Stock + MSRP</title>
+  <title>Calendario Pokémon TCG — Lanzamientos + MSRP</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <div class="title">
-      <h1>⚡ Monitor Pokémon TCG</h1>
-      <p class="subtitle">Producto sellado de cartas · en stock a MSRP o por debajo</p>
+      <h1>⚡ Calendario Pokémon TCG</h1>
+      <p class="subtitle">Producto sellado de cartas · cuándo sale · a qué precio (MSRP) · dónde</p>
     </div>
     <div class="meta">
       <span id="last-checked" class="muted">Cargando…</span>
     </div>
   </header>
 
-  <section id="health" class="health" aria-label="Salud de providers"></section>
-
   <section class="controls">
-    <input id="search" type="search" placeholder="Filtrar por set o tipo…" />
+    <input id="search" type="search" placeholder="Buscar set o tipo…" />
     <label class="checkbox">
-      <input id="only-msrp" type="checkbox" /> Solo a MSRP o menos, en stock
+      <input id="only-deal" type="checkbox" /> Solo con stock a MSRP en Best Buy
     </label>
   </section>
 
   <main id="content">
-    <p id="status" class="muted">Cargando estado…</p>
-    <div id="cards"></div>
+    <p id="status" class="muted">Cargando calendario…</p>
+
+    <h2 class="section-title">📅 Próximos lanzamientos</h2>
+    <div id="upcoming" class="grid"></div>
+
+    <h2 class="section-title">🟢 Ya disponibles</h2>
+    <div id="released" class="grid"></div>
   </main>
 
   <footer>
     <p class="muted">
-      Datos de <code>data/state.json</code>. Latencia ~10–15 min (cron gratis).
-      No es auto-checkout: solo detección y alerta.
+      El <strong>calendario</strong> (qué sale, cuándo y a qué MSRP) funciona sin
+      configurar nada. El <strong>estado de stock</strong> proviene de la API gratuita
+      de Best Buy si configuras <code>BESTBUY_API_KEY</code>. Latencia ~10–15 min.
+      No es auto-checkout: solo información y aviso.
     </p>
+    <p id="health" class="muted"></p>
   </footer>
 
   <script src="app.js"></script>

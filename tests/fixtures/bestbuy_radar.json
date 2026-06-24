@@ -1,0 +1,53 @@
+{
+  "from": 1,
+  "to": 4,
+  "total": 4,
+  "products": [
+    {
+      "sku": 6588543,
+      "name": "Pokémon TCG: Chaos Rising Elite Trainer Box",
+      "salePrice": 59.99,
+      "regularPrice": 59.99,
+      "onlineAvailability": false,
+      "orderable": "ComingSoon",
+      "releaseDate": "2026-05-22",
+      "preorderable": true,
+      "url": "https://www.bestbuy.com/site/6588543.p",
+      "image": "https://pisces.bbystatic.com/etb.jpg"
+    },
+    {
+      "sku": 6588544,
+      "name": "Pokémon TCG: Chaos Rising Booster Bundle",
+      "salePrice": 26.99,
+      "regularPrice": 26.99,
+      "onlineAvailability": true,
+      "orderable": "Available",
+      "releaseDate": "2026-05-22",
+      "preorderable": false,
+      "url": "https://www.bestbuy.com/site/6588544.p",
+      "image": "https://pisces.bbystatic.com/bundle.jpg"
+    },
+    {
+      "sku": 6500000,
+      "name": "Pokémon Scarlet & Violet - Nintendo Switch [Digital]",
+      "salePrice": 59.99,
+      "regularPrice": 59.99,
+      "onlineAvailability": true,
+      "orderable": "Available",
+      "releaseDate": "2026-01-01",
+      "url": "https://www.bestbuy.com/site/6500000.p",
+      "image": "https://pisces.bbystatic.com/game.jpg"
+    },
+    {
+      "sku": 6500001,
+      "name": "Pokémon Pikachu Plush Toy 12 inch",
+      "salePrice": 24.99,
+      "regularPrice": 24.99,
+      "onlineAvailability": true,
+      "orderable": "Available",
+      "releaseDate": "2025-11-01",
+      "url": "https://www.bestbuy.com/site/6500001.p",
+      "image": "https://pisces.bbystatic.com/plush.jpg"
+    }
+  ]
+}

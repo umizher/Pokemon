@@ -1,17 +1,10 @@
 {
-  "generated_at": "2026-06-24T01:33:38.275685Z",
-  "providers_health": {
-    "target": {
-      "name": "target",
-      "ok": true,
-      "last_error": null,
-      "last_checked": "2026-06-24T01:33:38.275205Z"
-    }
-  },
+  "generated_at": "2026-06-24T04:27:58.306902Z",
+  "providers_health": {},
   "products": [
     {
       "id": "sv-perfect-order-etb",
-      "set_name": "Perfect Order",
+      "set_name": "Perfect Order — Elite Trainer Box",
       "product_type": "elite_trainer_box",
       "language": "EN",
       "release_date": "2026-03-27",
@@ -19,11 +12,35 @@
       "currency": "USD",
       "image_url": null,
       "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart",
+        "Pokémon Center",
+        "Costco"
+      ],
+      "skus": {}
+    },
+    {
+      "id": "sv-perfect-order-booster-bundle",
+      "set_name": "Perfect Order — Booster Bundle",
+      "product_type": "booster_bundle",
+      "language": "EN",
+      "release_date": "2026-03-27",
+      "official_msrp": 26.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart"
+      ],
       "skus": {}
     },
     {
       "id": "sv-chaos-rising-etb",
-      "set_name": "Chaos Rising",
+      "set_name": "Chaos Rising — Elite Trainer Box",
       "product_type": "elite_trainer_box",
       "language": "EN",
       "release_date": "2026-05-22",
@@ -31,11 +48,52 @@
       "currency": "USD",
       "image_url": null,
       "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart",
+        "Pokémon Center"
+      ],
+      "skus": {}
+    },
+    {
+      "id": "sv-chaos-rising-booster-bundle",
+      "set_name": "Chaos Rising — Booster Bundle",
+      "product_type": "booster_bundle",
+      "language": "EN",
+      "release_date": "2026-05-22",
+      "official_msrp": 26.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart"
+      ],
+      "skus": {}
+    },
+    {
+      "id": "sv-pitch-black-etb",
+      "set_name": "Pitch Black — Elite Trainer Box",
+      "product_type": "elite_trainer_box",
+      "language": "EN",
+      "release_date": "2026-07-17",
+      "official_msrp": 59.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart",
+        "Pokémon Center"
+      ],
       "skus": {}
     },
     {
       "id": "sv-pitch-black-booster-bundle",
-      "set_name": "Pitch Black",
+      "set_name": "Pitch Black — Booster Bundle",
       "product_type": "booster_bundle",
       "language": "EN",
       "release_date": "2026-07-17",
@@ -43,111 +101,50 @@
       "currency": "USD",
       "image_url": null,
       "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart"
+      ],
       "skus": {}
     },
     {
-      "id": "lumiose-city-mini-tin",
-      "set_name": "Lumiose City Mini",
-      "product_type": "tin",
+      "id": "sv-storm-emerald-etb",
+      "set_name": "Storm Emerald — Elite Trainer Box",
+      "product_type": "elite_trainer_box",
       "language": "EN",
-      "release_date": "2026-06-01",
-      "official_msrp": 24.99,
+      "release_date": "2026-09-11",
+      "official_msrp": 59.99,
       "currency": "USD",
       "image_url": null,
-      "source": "pokemon.com",
+      "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart",
+        "Pokémon Center"
+      ],
       "skus": {}
     },
     {
-      "id": "mega-moonlit-tin",
-      "set_name": "Mega Moonlit",
-      "product_type": "tin",
+      "id": "30th-anniversary-etb",
+      "set_name": "30th Anniversary Celebration — Elite Trainer Box",
+      "product_type": "elite_trainer_box",
       "language": "EN",
-      "release_date": "2026-06-01",
-      "official_msrp": 24.99,
+      "release_date": "2026-09-16",
+      "official_msrp": 64.99,
       "currency": "USD",
       "image_url": null,
-      "source": "pokemon.com",
-      "skus": {}
-    },
-    {
-      "id": "first-partner-illustration-series-2-collection-box",
-      "set_name": "First Partner Illustration — Series 2",
-      "product_type": "collection_box",
-      "language": "EN",
-      "release_date": "2026-06-01",
-      "official_msrp": 49.99,
-      "currency": "USD",
-      "image_url": null,
-      "source": "pokemon.com",
+      "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart",
+        "Pokémon Center",
+        "GameStop"
+      ],
       "skus": {}
     }
   ],
-  "listings": [
-    {
-      "product_id": "sv-perfect-order-etb",
-      "retailer": "target",
-      "url": null,
-      "sku": null,
-      "price": null,
-      "currency": "USD",
-      "stock_state": "unknown",
-      "last_checked": "2026-06-24T01:33:38.275304Z",
-      "response_hash": null
-    },
-    {
-      "product_id": "sv-chaos-rising-etb",
-      "retailer": "target",
-      "url": null,
-      "sku": null,
-      "price": null,
-      "currency": "USD",
-      "stock_state": "unknown",
-      "last_checked": "2026-06-24T01:33:38.275356Z",
-      "response_hash": null
-    },
-    {
-      "product_id": "sv-pitch-black-booster-bundle",
-      "retailer": "target",
-      "url": null,
-      "sku": null,
-      "price": null,
-      "currency": "USD",
-      "stock_state": "unknown",
-      "last_checked": "2026-06-24T01:33:38.275403Z",
-      "response_hash": null
-    },
-    {
-      "product_id": "lumiose-city-mini-tin",
-      "retailer": "target",
-      "url": null,
-      "sku": null,
-      "price": null,
-      "currency": "USD",
-      "stock_state": "unknown",
-      "last_checked": "2026-06-24T01:33:38.275450Z",
-      "response_hash": null
-    },
-    {
-      "product_id": "mega-moonlit-tin",
-      "retailer": "target",
-      "url": null,
-      "sku": null,
-      "price": null,
-      "currency": "USD",
-      "stock_state": "unknown",
-      "last_checked": "2026-06-24T01:33:38.275495Z",
-      "response_hash": null
-    },
-    {
-      "product_id": "first-partner-illustration-series-2-collection-box",
-      "retailer": "target",
-      "url": null,
-      "sku": null,
-      "price": null,
-      "currency": "USD",
-      "stock_state": "unknown",
-      "last_checked": "2026-06-24T01:33:38.275543Z",
-      "response_hash": null
-    }
-  ]
+  "listings": []
 }

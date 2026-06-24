@@ -1,45 +1,100 @@
-# Seed del catálogo + MSRP de referencia (USD, mercado EN/US).
+# Calendario semilla (cero configuración) + MSRP de referencia (USD, mercado EN/US).
 #
-# NOTA DE HONESTIDAD: los MSRP son valores de referencia típicos del mercado
-# US y deben validarse contra el anuncio oficial de cada producto. El Release
-# Radar (Fase 3) irá añadiendo/actualizando productos automáticamente desde
-# pokemon.com; este archivo es la semilla inicial y la fuente de MSRP de
-# referencia cuando la fuente oficial no publica precio.
+# Esta es la base del CALENDARIO: aunque no configures ninguna clave, la app
+# muestra estos lanzamientos con su fecha y MSRP. Si configuras la clave gratuita
+# de Best Buy, el radar añade automáticamente más productos (con fecha real y
+# precio) y revisa el stock.
 #
-# `skus` mapea retailer -> identificador del producto en esa tienda
-# (Best Buy: SKU numérico; Target: TCIN). Déjalos vacíos hasta confirmarlos;
-# un provider sin SKU para un producto devuelve stock_state: unknown.
+# NOTA: fechas y MSRP son de referencia pública del mercado US y conviene
+# validarlos contra el anuncio oficial. `retailers` = tiendas donde típicamente
+# se vende (informativo en el dashboard). `skus.bestbuy` se rellena solo cuando
+# el radar de Best Buy encuentra el producto.
 
 products:
   - id: sv-perfect-order-etb
-    set_name: "Perfect Order"
+    set_name: "Perfect Order — Elite Trainer Box"
     product_type: elite_trainer_box
     language: EN
     release_date: 2026-03-27
     official_msrp: 59.99
     currency: USD
-    image_url: null
+    retailers: [Best Buy, Target, Walmart, Pokémon Center, Costco]
+    source: seed
+    skus: {}
+
+  - id: sv-perfect-order-booster-bundle
+    set_name: "Perfect Order — Booster Bundle"
+    product_type: booster_bundle
+    language: EN
+    release_date: 2026-03-27
+    official_msrp: 26.99
+    currency: USD
+    retailers: [Best Buy, Target, Walmart]
     source: seed
     skus: {}
 
   - id: sv-chaos-rising-etb
-    set_name: "Chaos Rising"
+    set_name: "Chaos Rising — Elite Trainer Box"
     product_type: elite_trainer_box
     language: EN
     release_date: 2026-05-22
     official_msrp: 59.99
     currency: USD
-    image_url: null
+    retailers: [Best Buy, Target, Walmart, Pokémon Center]
+    source: seed
+    skus: {}
+
+  - id: sv-chaos-rising-booster-bundle
+    set_name: "Chaos Rising — Booster Bundle"
+    product_type: booster_bundle
+    language: EN
+    release_date: 2026-05-22
+    official_msrp: 26.99
+    currency: USD
+    retailers: [Best Buy, Target, Walmart]
+    source: seed
+    skus: {}
+
+  - id: sv-pitch-black-etb
+    set_name: "Pitch Black — Elite Trainer Box"
+    product_type: elite_trainer_box
+    language: EN
+    release_date: 2026-07-17
+    official_msrp: 59.99
+    currency: USD
+    retailers: [Best Buy, Target, Walmart, Pokémon Center]
     source: seed
     skus: {}
 
   - id: sv-pitch-black-booster-bundle
-    set_name: "Pitch Black"
+    set_name: "Pitch Black — Booster Bundle"
     product_type: booster_bundle
     language: EN
     release_date: 2026-07-17
     official_msrp: 26.99
     currency: USD
-    image_url: null
+    retailers: [Best Buy, Target, Walmart]
+    source: seed
+    skus: {}
+
+  - id: sv-storm-emerald-etb
+    set_name: "Storm Emerald — Elite Trainer Box"
+    product_type: elite_trainer_box
+    language: EN
+    release_date: 2026-09-11
+    official_msrp: 59.99
+    currency: USD
+    retailers: [Best Buy, Target, Walmart, Pokémon Center]
+    source: seed
+    skus: {}
+
+  - id: 30th-anniversary-etb
+    set_name: "30th Anniversary Celebration — Elite Trainer Box"
+    product_type: elite_trainer_box
+    language: EN
+    release_date: 2026-09-16
+    official_msrp: 64.99
+    currency: USD
+    retailers: [Best Buy, Target, Walmart, Pokémon Center, GameStop]
     source: seed
     skus: {}

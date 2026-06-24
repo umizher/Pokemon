@@ -14,8 +14,8 @@ zip: "10001"
 # Providers de stock habilitados. Un provider deshabilitado o sin credenciales
 # se omite con elegancia (se marca en providers_health).
 stock_providers:
-  bestbuy: true
-  target: true
+  bestbuy: true         # API gratuita: da stock + precio. Lo único recomendado.
+  target: false         # opcional; requiere rellenar TCIN en products.yaml
   walmart: false        # requiere aprobación de afiliados
   amazon: false         # requiere PA-API 5.0
   pokemoncenter: false  # best-effort, requiere proxy (Cloudflare)
@@ -26,6 +26,7 @@ notifiers:
   telegram: false
   email: false
 
-# Release Radar
+# Release Radar = fuentes del CALENDARIO de lanzamientos.
 radar:
-  pokemon_official: true
+  bestbuy_radar: true     # calendario desde la API de Best Buy (misma clave gratis)
+  pokemon_official: false # opcional; pokemon.com puede bloquear según la IP
