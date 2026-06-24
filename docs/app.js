@@ -77,17 +77,38 @@ function statusBadge(listing, product) {
     </div>`;
 }
 
+function daysUntil(iso) {
+  if (!iso) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const d = new Date(iso + (iso.length === 10 ? "T00:00:00" : ""));
+  if (isNaN(d)) return null;
+  return Math.round((d - today) / 86400000);
+}
+
+function countdownBadge(iso) {
+  const n = daysUntil(iso);
+  if (n === null || n < 0) return "";
+  if (n === 0) return '<span class="countdown today">¡Hoy!</span>';
+  if (n === 1) return '<span class="countdown">Mañana</span>';
+  return `<span class="countdown">Faltan ${n} días</span>`;
+}
+
 function card(product, listings) {
   const bb = bestbuyListing(listings);
   const deal = isDeal(bb, product);
   const stores = (product.retailers || []).length
     ? `<div class="stores">Dónde: ${product.retailers.map(escapeHtml).join(" · ")}</div>`
     : "";
+  const img = product.image_url
+    ? `<img class="thumb" src="${escapeHtml(product.image_url)}" alt="" loading="lazy" />`
+    : "";
   return `
     <div class="card ${deal ? "deal" : ""}">
+      ${img}
       <div class="type">${escapeHtml(TYPE_LABELS[product.product_type] || product.product_type)} · ${escapeHtml(product.language || "EN")}</div>
       <h3>${escapeHtml(product.set_name)}</h3>
-      <div class="date">📅 ${fmtDate(product.release_date)}</div>
+      <div class="date">📅 ${fmtDate(product.release_date)} ${countdownBadge(product.release_date)}</div>
       <div class="msrp">MSRP: <strong>${fmtPrice(product.official_msrp, product.currency)}</strong></div>
       ${stores}
       ${statusBadge(bb, product)}

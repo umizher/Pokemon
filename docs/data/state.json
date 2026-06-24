@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T04:27:58.306902Z",
+  "generated_at": "2026-06-24T04:33:53.421693Z",
   "providers_health": {},
   "products": [
     {
@@ -123,6 +123,39 @@
         "Target",
         "Walmart",
         "Pokémon Center"
+      ],
+      "skus": {}
+    },
+    {
+      "id": "sv-storm-emerald-booster-bundle",
+      "set_name": "Storm Emerald — Booster Bundle",
+      "product_type": "booster_bundle",
+      "language": "EN",
+      "release_date": "2026-09-11",
+      "official_msrp": 26.99,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "retailers": [
+        "Best Buy",
+        "Target",
+        "Walmart"
+      ],
+      "skus": {}
+    },
+    {
+      "id": "first-partner-illustration-collection-s2",
+      "set_name": "First Partner Illustration Collection — Serie 2",
+      "product_type": "collection_box",
+      "language": "EN",
+      "release_date": "2026-06-19",
+      "official_msrp": null,
+      "currency": "USD",
+      "image_url": null,
+      "source": "seed",
+      "retailers": [
+        "Pokémon Center",
+        "Best Buy"
       ],
       "skus": {}
     },
