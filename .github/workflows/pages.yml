@@ -1,0 +1,73 @@
+name: Calendario (build + deploy Pages)
+
+# Construye el calendario (refresca docs/data) y lo publica en GitHub Pages.
+# Usa configure-pages con enablement:true para ACTIVAR Pages automáticamente,
+# sin necesidad de tocar Settings → Pages a mano.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Cada 15 min (cron best-effort, puede retrasarse). Refresca calendario/stock.
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -e .
+
+      # Persiste dedupe/salud entre ejecuciones (para no repetir alertas).
+      - name: Restaurar cache de estado
+        uses: actions/cache@v4
+        with:
+          path: |
+            docs/data/dedupe.json
+            docs/data/health.json
+          key: state-${{ github.run_id }}
+          restore-keys: state-
+
+      - name: Refrescar calendario + stock
+        env:
+          BESTBUY_API_KEY: ${{ secrets.BESTBUY_API_KEY }}
+          TARGET_API_KEY: ${{ secrets.TARGET_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        # No romper el deploy si una fuente externa falla.
+        run: python -m tcg_monitor --radar --once || true
+
+      - name: Configurar Pages (activa Pages automáticamente)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Subir artefacto del dashboard
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Desplegar a Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

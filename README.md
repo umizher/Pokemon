@@ -98,43 +98,30 @@ python -m tcg_monitor --radar --once   # amplía calendario y revisa stock en Be
 - **Anti-bot**: `http_client` rota User-Agent, usa headers realistas, jitter entre
   requests y backoff exponencial ante 403/429/503. Proxy opcional vía `HTTP_PROXY_URL`.
 
-## Despliegue (GitHub Actions + Pages)
+## Despliegue (automático)
 
-### 1. Configurar Secrets
+El workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) hace **todo
+solo**: refresca el calendario, **activa GitHub Pages automáticamente**
+(`actions/configure-pages` con `enablement: true`) y publica el dashboard. Corre en
+cada `push` a `main`, cada **15 min** (cron) y con **Run workflow** manual.
 
-En el repo: **Settings → Secrets and variables → Actions → New repository secret**.
-Añade los que vayas a usar (todos son opcionales salvo el que habilite cada provider/canal):
+El dashboard queda en `https://<usuario>.github.io/<repo>/`. No hace falta tocar
+**Settings → Pages**.
 
-| Secret | Para qué |
-| --- | --- |
-| `BESTBUY_API_KEY` | Provider Best Buy (gratis en developer.bestbuy.com) |
-| `TARGET_API_KEY` | Override del key público de Target (opcional) |
-| `DISCORD_WEBHOOK_URL` | Alertas a Discord |
-| `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | Alertas a Telegram |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, `SMTP_TO` | Alertas por email |
-| `HTTP_PROXY_URL` | Proxy residencial opcional (Target/Pokémon Center) |
+> El cron de Actions es *best-effort*: puede retrasarse varios minutos. Para drops que
+> se agotan en segundos no es suficiente.
 
-### 2. Activar el scheduler
+### Único paso manual: la clave gratuita de Best Buy (opcional)
 
-El workflow [`.github/workflows/monitor.yml`](.github/workflows/monitor.yml) corre
-`python -m tcg_monitor --radar --once` cada **10 min** (`cron: '*/10 * * * *'`) y
-también con **Run workflow** manual (`workflow_dispatch`). Hace commit de
-`docs/data/state.json` y `catalog.json` cuando cambian, y cachea `dedupe.json`
-entre ejecuciones para no repetir alertas.
+El **calendario funciona sin nada**. Para activar el **estado de stock a MSRP**:
 
-> El cron de Actions es *best-effort*: puede retrasarse varios minutos. La
-> granularidad mínima realista es ~5 min. Para drops que se agotan en segundos no
-> es suficiente — considera un backend con `--loop` (Render/Railway/Fly).
+1. Regístrate en [developer.bestbuy.com](https://developer.bestbuy.com/) (gratis, 2 min)
+   y copia tu API key.
+2. **Settings → Secrets and variables → Actions → New repository secret** →
+   nombre `BESTBUY_API_KEY`, valor = tu clave.
 
-Necesitas dar permiso de escritura al workflow: **Settings → Actions → General →
-Workflow permissions → Read and write permissions** (el workflow ya declara
-`permissions: contents: write`).
-
-### 3. Activar GitHub Pages
-
-**Settings → Pages → Build and deployment → Source: Deploy from a branch**, rama
-`main` (tras el merge) y carpeta **`/docs`**. El dashboard quedará en
-`https://<usuario>.github.io/<repo>/` y leerá `data/state.json` que actualiza el workflow.
+Otros secrets opcionales (alertas): `DISCORD_WEBHOOK_URL`, `TELEGRAM_BOT_TOKEN` +
+`TELEGRAM_CHAT_ID`, o `SMTP_*` para email.
 
 ## Realidades / honestidad técnica
 
