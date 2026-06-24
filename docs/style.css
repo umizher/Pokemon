@@ -77,7 +77,8 @@ h1 { margin: 0; font-size: 1.5rem; }
 
 main { padding: 0 2rem 2rem; }
 
-#cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.section-title { margin: 1.5rem 0 .75rem; font-size: 1.15rem; }
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 
 .card {
   background: var(--panel);
@@ -85,10 +86,12 @@ main { padding: 0 2rem 2rem; }
   border-radius: 12px;
   padding: 1rem 1.2rem;
 }
-.card h3 { margin: 0 0 .2rem; font-size: 1.1rem; }
+.card h3 { margin: 0 0 .3rem; font-size: 1.1rem; }
 .card .type { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
-.card .release { color: var(--muted); font-size: .85rem; margin: .3rem 0 .8rem; }
-.card .msrp { font-size: .9rem; }
+.card .date { font-size: .95rem; margin: .2rem 0 .5rem; color: var(--accent); font-weight: 600; }
+.card .msrp { font-size: .95rem; }
+.card .stores { font-size: .82rem; color: var(--muted); margin-top: .5rem; }
+.card .bestbuy { font-size: .85rem; margin-top: .6rem; padding-top: .6rem; border-top: 1px solid var(--border); }
 
 .listing {
   display: flex;

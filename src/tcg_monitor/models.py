@@ -54,6 +54,8 @@ class Product(BaseModel):
     currency: str = "USD"
     image_url: str | None = None
     source: str | None = None
+    # tiendas donde típicamente se vende (informativo para el calendario)
+    retailers: list[str] = Field(default_factory=list)
     # retailer -> identificador en esa tienda (Best Buy SKU, Target TCIN, ...)
     skus: dict[str, str] = Field(default_factory=dict)
 

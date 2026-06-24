@@ -1,21 +1,32 @@
-# Monitor de Lanzamientos Pokémon TCG — Stock + MSRP
+# Calendario Pokémon TCG — Lanzamientos + MSRP
 
-App open-source que detecta producto **sellado de Pokémon TCG (solo cartas)** próximo
-o recién anunciado, vigila **qué retailers lo tienen en stock a MSRP o por debajo**, y
-**alerta** apenas se cumple — para comprar antes de que se agote.
+App open-source que te muestra, para **producto sellado de Pokémon TCG (solo cartas)**:
 
-> Solo cartas (booster boxes, ETB, bundles, blisters, tins, collection boxes).
-> Sin auto-checkout: solo detección y alerta.
+1. **Qué sale de nuevo** (booster boxes, ETB, bundles, blisters, tins, collections).
+2. **Cuándo** (fecha de lanzamiento) y **a qué precio oficial (MSRP)**.
+3. **Dónde** se venderá (tiendas), y **si hay stock a MSRP en Best Buy**.
 
-## Estado del proyecto (por fases)
+> Solo cartas. Sin auto-checkout: solo información y aviso.
 
-- [x] **Fase 1 — Scaffolding**: modelos, interfaz de provider/notifier/radar, config,
-  seed de MSRP, store de estado, filtro MSRP, dedupe, orquestador y CLI.
-- [x] **Fase 2** — Providers Best Buy + Target end-to-end + Discord.
-- [x] **Fase 3** — Release Radar (pokemon.com).
-- [x] **Fase 4** — Dashboard en GitHub Pages.
-- [x] **Fase 5** — GitHub Actions cron + secrets.
-- [x] **Fase 6** — Más providers + anti-bot + alertas de fallo + Telegram/Email.
+## Cómo funciona (en simple)
+
+- **El calendario funciona sin configurar NADA.** Abres el dashboard y ves los próximos
+  lanzamientos con su fecha, MSRP y tiendas. Esto sale de `config/products.yaml` (semilla)
+  y se puede ampliar solo.
+- **El estado de stock necesita la API gratuita de Best Buy.** No se paga: te registras en
+  [developer.bestbuy.com](https://developer.bestbuy.com/) (2 min), copias tu clave en
+  `BESTBUY_API_KEY`, y la app te dice cuándo hay stock **a MSRP o menos** en Best Buy.
+  Esa misma clave también **amplía el calendario** automáticamente (productos en preventa
+  con su fecha y precio reales).
+
+### ¿Por qué no "todas las tiendas sin nada"?
+
+Para saber si hay stock **ahora mismo** hay que preguntarle a la tienda, y eso requiere su
+API o scraping. Best Buy tiene API gratis (por eso es la recomendada). **Target, Walmart,
+Amazon y Pokémon Center** exigen aprobación de afiliados o se protegen con anti-bot
+(Cloudflare/Akamai) y normalmente **se bloquean desde infraestructura gratis sin un proxy
+de pago** — están incluidos como opcionales y se marcan claramente, no se finge que
+funcionan.
 
 ## Arquitectura
 
@@ -26,12 +37,12 @@ orquestador central recorre los providers (**aislando fallos**: uno que rompa no
 al resto), normaliza resultados, aplica el filtro MSRP, persiste el estado y notifica.
 
 ```
-config/            settings.yaml (tolerancia, dedupe, providers) + products.yaml (seed/MSRP)
+config/            settings.yaml (qué activar) + products.yaml (calendario semilla + MSRP)
 src/tcg_monitor/   models, http_client (anti-bot), store, filters, dedupe, orchestrator
-  providers/       base + (bestbuy, target, ...)        [retailers]
-  radar/           base + pokemon_official              [noticias]
-  notify/          base + discord/telegram/email        [alertas]
-docs/              dashboard estático (GitHub Pages) + data/state.json
+  providers/       base + bestbuy (+ target/walmart/amazon/pokemoncenter opcionales)
+  radar/           base + bestbuy_radar (calendario) + pokemon_official (opcional)
+  notify/          base + discord/telegram/email        [alertas, opcionales]
+docs/              dashboard "calendario" estático (GitHub Pages) + data/state.json
 tests/             parsers con fixtures, filtros, dedupe
 ```
 
@@ -58,18 +69,20 @@ Ver el dashboard localmente:
 python -m http.server -d docs 8099   # http://localhost:8099
 ```
 
-Release Radar (descubre productos sellados nuevos y actualiza `docs/data/catalog.json`):
+Actualizar el calendario (radar) y revisar stock:
 
 ```bash
-python -m tcg_monitor --radar          # solo descubrir + actualizar catálogo
-python -m tcg_monitor --radar --once   # descubrir y luego revisar stock
+python -m tcg_monitor --radar          # amplía el calendario (necesita BESTBUY_API_KEY)
+python -m tcg_monitor --radar --once   # amplía calendario y revisa stock en Best Buy
 ```
 
-> **Nota honesta:** pokemon.com está protegido por Akamai y devuelve **403 desde
-> infra gratis** (GitHub Actions / contenedores sin proxy residencial). El radar
-> degrada a "0 descubiertos" sin romper el ciclo; el catálogo sigue funcionando con
-> el seed de `config/products.yaml`. El parser está testeado con un fixture y se
-> activa en cuanto haya acceso (IP no bloqueada o proxy).
+> **Nota honesta sobre la red:** el entorno de desarrollo de este repo sale por un
+> proxy con política de egreso, así que **no se puede comprobar el acceso a sitios
+> externos desde ahí** (devuelve 403 a casi todo). El flujo real (API de Best Buy y
+> opcionalmente pokemon.com) se valida en **GitHub Actions** (internet abierto) o
+> ejecutándolo en tu máquina. La fuente `pokemon_official` queda **opcional/off por
+> defecto** porque pokemon.com puede bloquear según la IP; el calendario semilla y el
+> radar de Best Buy no dependen de ella.
 
 ## Notificaciones y robustez
 
@@ -120,9 +133,8 @@ Workflow permissions → Read and write permissions** (el workflow ya declara
 ### 3. Activar GitHub Pages
 
 **Settings → Pages → Build and deployment → Source: Deploy from a branch**, rama
-`claude/pokemon-tcg-stock-monitor-qkatz4` (o `main` tras el merge) y carpeta
-**`/docs`**. El dashboard quedará en `https://<usuario>.github.io/<repo>/` y leerá
-`data/state.json` que actualiza el workflow.
+`main` (tras el merge) y carpeta **`/docs`**. El dashboard quedará en
+`https://<usuario>.github.io/<repo>/` y leerá `data/state.json` que actualiza el workflow.
 
 ## Realidades / honestidad técnica
 
