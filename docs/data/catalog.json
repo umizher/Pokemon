@@ -124,6 +124,39 @@
     "skus": {}
   },
   {
+    "id": "sv-storm-emerald-booster-bundle",
+    "set_name": "Storm Emerald — Booster Bundle",
+    "product_type": "booster_bundle",
+    "language": "EN",
+    "release_date": "2026-09-11",
+    "official_msrp": 26.99,
+    "currency": "USD",
+    "image_url": null,
+    "source": "seed",
+    "retailers": [
+      "Best Buy",
+      "Target",
+      "Walmart"
+    ],
+    "skus": {}
+  },
+  {
+    "id": "first-partner-illustration-collection-s2",
+    "set_name": "First Partner Illustration Collection — Serie 2",
+    "product_type": "collection_box",
+    "language": "EN",
+    "release_date": "2026-06-19",
+    "official_msrp": null,
+    "currency": "USD",
+    "image_url": null,
+    "source": "seed",
+    "retailers": [
+      "Pokémon Center",
+      "Best Buy"
+    ],
+    "skus": {}
+  },
+  {
     "id": "30th-anniversary-etb",
     "set_name": "30th Anniversary Celebration — Elite Trainer Box",
     "product_type": "elite_trainer_box",

@@ -77,6 +77,7 @@ products:
     source: seed
     skus: {}
 
+  # Storm Emerald: fecha aproximada (ventana ago/sep 2026) — confirmar oficial.
   - id: sv-storm-emerald-etb
     set_name: "Storm Emerald — Elite Trainer Box"
     product_type: elite_trainer_box
@@ -85,6 +86,29 @@ products:
     official_msrp: 59.99
     currency: USD
     retailers: [Best Buy, Target, Walmart, Pokémon Center]
+    source: seed
+    skus: {}
+
+  - id: sv-storm-emerald-booster-bundle
+    set_name: "Storm Emerald — Booster Bundle"
+    product_type: booster_bundle
+    language: EN
+    release_date: 2026-09-11
+    official_msrp: 26.99
+    currency: USD
+    retailers: [Best Buy, Target, Walmart]
+    source: seed
+    skus: {}
+
+  # First Partner Illustration Collection — Serie 2 (Johto/Unova/Galar).
+  - id: first-partner-illustration-collection-s2
+    set_name: "First Partner Illustration Collection — Serie 2"
+    product_type: collection_box
+    language: EN
+    release_date: 2026-06-19
+    official_msrp: null   # MSRP por confirmar
+    currency: USD
+    retailers: [Pokémon Center, Best Buy]
     source: seed
     skus: {}
 
